@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+    >
+
+    <com.zsh.stepview.StepIndicator
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:circle_select_color="@android:color/holo_blue_dark"
+        app:circle_unselect_color="@android:color/darker_gray"
+        app:selected_position="0"
+        app:step_length="3"
+        app:step_line_color="#B6B6B6"
+        app:text_select_color="#4c81ca"
+        app:text_unselect_color="#959595"
+        />
+</LinearLayout>

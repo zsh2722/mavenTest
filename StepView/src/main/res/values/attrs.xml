@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="StepIndicator">
+        <attr name="step_length" format="integer"/>
+        <attr name="circle_select_color" format="color"/>
+        <attr name="circle_unselect_color" format="color"/>
+        <attr name="text_select_color" format="color"/>
+        <attr name="text_unselect_color" format="color"/>
+        <attr name="step_text_size" format="dimension"/>
+        <attr name="top_indicator_margin" format="dimension"/>
+        <attr name="line_height" format="dimension"/>
+        <attr name="step_line_color" format="color"/>
+        <attr name="selected_position" format="integer"/>
+    </declare-styleable>
+
+</resources>
