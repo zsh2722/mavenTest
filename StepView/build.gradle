@@ -24,4 +24,31 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
 }
+apply plugin: 'com.novoda.bintray-release'//添加
+
+//项目主页
+def siteUrl = 'https://github.com/zsh2722/mavenTest'
+
+publish {
+    repoName = 'TestMaven'//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'zhangsh'//bintray.com的用户名
+    groupId = 'com.zsh'//jcenter上的路径
+    artifactId = 'step-view'//项目名称 ,这个名字一定要和bintray上创建的包名一样
+    publishVersion = '1.0.0'//版本号
+    desc = '一个自定义的stepview'//描述，不重要
+    website = siteUrl//项目主页
+}
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+// gradlew 上传命令
+// gradlew clean build bintrayUpload -PbintrayUser=zhangsh -PbintrayKey=****** -PdryRun=false
+
+
+
+
