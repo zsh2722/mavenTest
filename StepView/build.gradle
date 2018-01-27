@@ -8,47 +8,145 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    lintOptions {
+        abortOnError false
+    }
 }
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 }
-apply plugin: 'com.novoda.bintray-release'//添加
+// 应用编写好的命令插件
+apply from: './push1.gradle'
 
-//项目主页
-def siteUrl = 'https://github.com/zsh2722/mavenTest'
 
-publish {
-    repoName = 'TestMaven'//远程仓库名字,不指明，默认是上传到maven
-    userOrg = 'zhangsh'//bintray.com的用户名
-    groupId = 'com.zsh'//jcenter上的路径
-    artifactId = 'step-view'//项目名称 ,这个名字一定要和bintray上创建的包名一样
-    publishVersion = '1.0.0'//版本号
-    desc = '一个自定义的stepview'//描述，不重要
-    website = siteUrl//项目主页
-}
+// 添加编写好的gradle命令文件
+//apply from: 'push1.gradle'
+//// 添加插件支持
+//apply plugin: 'com.novoda.bintray-release'
+//
+////项目主页
+//def siteUrl = 'https://github.com/zsh2722/mavenTest'
+//publish {
+//    repoName = 'TestMaven'// 远程仓库名字,不指明，默认是上传到maven
+//    userOrg = 'zhangsh'// bintray.com的用户名
+//    groupId = 'com.zsh'// jcenter上的路径
+//    artifactId = 'step-view'// 项目名称 ,这个名字一定要和bintray上创建的包名一样
+//    publishVersion = '1.0.0'// 版本号
+//    desc = '一个自定义的stepview'//描述，不重要
+//    website = siteUrl// 项目主页
+//}
+//// 防止编码问题
+//tasks.withType(Javadoc) {
+//    options.addStringOption('Xdoclint:none', '-quiet')
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//}
 
-tasks.withType(Javadoc) {//防止编码问题
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding', 'UTF-8')
-    options.addStringOption('charSet', 'UTF-8')
-}
+//apply from: 'nexus-push.gradle'
+//apply plugin: 'com.novoda.bintray-release'//添加
+
+////项目主页
+//def siteUrl = 'https://github.com/zsh2722/mavenTest'
+//
+//publish {
+//    repoName = 'TestMaven'//远程仓库名字,不指明，默认是上传到maven
+//    userOrg = 'zhangsh'//bintray.com的用户名
+//    groupId = 'com.zsh'//jcenter上的路径
+//    artifactId = 'step-view'//项目名称 ,这个名字一定要和bintray上创建的包名一样
+//    publishVersion = '1.0.0'//版本号
+//    desc = '一个自定义的stepview'//描述，不重要
+//    website = siteUrl//项目主页
+//}
+//
+//tasks.withType(Javadoc) {//防止编码问题
+//    options.addStringOption('Xdoclint:none', '-quiet')
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//}
 // gradlew 上传命令
 // gradlew clean build bintrayUpload -PbintrayUser=zhangsh -PbintrayKey=****** -PdryRun=false
+// 第三种方式
+//gradlew -p StepView clean build uploadArchives
+//apply plugin: 'maven-publish'
+//apply plugin: 'maven'
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: "http://192.168.1.8:8081/repository/maven-3rd-party/") {
+//                authentication(userName: "admin", password: "admin123")
+//            }
+//            pom.project{
+//                pom.groupId = 'com.zsh'
+//                pom.artifactId = 'step-view'
+//                pom.version = '1.0.1'
+//                pom.packaging 'aar'
+//            }
+//        }
+//    }
+//}
+// 第四种
+//apply plugin: 'maven' // 引入maven工具
+//
+//uploadArchives {
+//    repositories {
+//
+//        mavenDeployer {
+//
+//            repository(url: "http://192.168.1.8:8081/repository/maven-3rd-party/") {//仓库的uri
+//                authentication(userName: "admin", password: "admin123")// 登入账号和密码
+//            }
+//            pom.project {
+//                name 'step-view'//项目名称
+//                version '1.0.3'//版本号
+//                artifactId 'step-view'//最后下载的aar包名称就是这个
+//                groupId 'com.zsh'// 建议使用包命
+//                packaging 'aar'//打包类型
+//                description 'step-view for Android'// 描述信息
+//            }
+//        }
+//    }
+//}
+//task androidSourcesJar(type: Jar) {
+//    classifier = 'sources'
+//    from android.sourceSets.main.java.sourceFiles
+//}
+//
+//artifacts {
+//    archives androidSourcesJar
+//}
 
-
-
-
+//task androidJavadocs(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//    classifier = 'javadoc'
+//
+//    from androidJavadocs.destinationDir
+//}
+//
+//task androidSourcesJar(type: Jar) {
+//    classifier = 'sources'
+//    from android.sourceSets.main.java.srcDirs
+//}
+////防止编码问题
+//tasks.withType(Javadoc) {
+//    options.addStringOption('Xdoclint:none', '-quiet')
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//}
+//artifacts {
+//    archives androidSourcesJar
+//    archives androidJavadocsJar
+//}

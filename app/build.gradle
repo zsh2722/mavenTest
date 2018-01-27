@@ -26,6 +26,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 //    implementation project(':StepView')
-    compile 'com.zsh:step-view:1.0.0'
+//    compile 'com.zsh:step-view:1.0.0'
 //    compile 'com.github.zsh2722:mavenTest:-SNAPSHOT'
+    compile 'com.zsh:step-view:1.0.1'
 }

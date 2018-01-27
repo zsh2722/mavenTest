@@ -17,13 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author zsh27
- * @date 2018/1/25
- * description .
- * @since 0
+ * The type Step indicator.
  */
-
 public class StepIndicator extends View {
+    /**
+     * The constant TAG.
+     */
     public static final String TAG = "zsh StepIndicator";
     private Context mContext;
     private int default_step_length = 1; // 默认长度
@@ -64,14 +63,32 @@ public class StepIndicator extends View {
     private OnDrawListener mDrawListener;
     private int mPaddingRight;
 
+    /**
+     * Instantiates a new Step indicator.
+     *
+     * @param context the context
+     */
     public StepIndicator(Context context) {
         super(context);
     }
 
+    /**
+     * Instantiates a new Step indicator.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public StepIndicator(Context context,  AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    /**
+     * Instantiates a new Step indicator.
+     *
+     * @param context      the context
+     * @param attrs        the attrs
+     * @param defStyleAttr the def style attr
+     */
     public StepIndicator(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttr(context, attrs);
@@ -198,26 +215,52 @@ public class StepIndicator extends View {
         return super.onTouchEvent(event);
     }
 
+    /**
+     * Sets step.
+     *
+     * @param step the step
+     */
     public void setStep(String[] step) {
         mStepLength = step.length;
         this.labels = step;
         invalidate();
     }
 
+    /**
+     * Sets draw listener.
+     *
+     * @param drawListener the draw listener
+     */
     public void setDrawListener(OnDrawListener drawListener) {
         mDrawListener = drawListener;
     }
 
+    /**
+     * Sets selected position.
+     *
+     * @param position the position
+     */
     public void setSelectedPosition(int position) {
         mSelectedPosition = position;
         invalidate();
     }
 
+    /**
+     * Reset.
+     */
     public void reset() {
         setSelectedPosition(0);
     }
 
+    /**
+     * The interface On draw listener.
+     */
     public interface OnDrawListener {
+        /**
+         * On ready.
+         *
+         * @param level the level
+         */
         void onReady(int level);
     }
 }

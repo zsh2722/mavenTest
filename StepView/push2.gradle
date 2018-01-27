@@ -1,0 +1,30 @@
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+// 防止编码问题
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://192.168.1.8:8081/repository/maven-3rd-party/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project{
+                // 组名称
+                pom.groupId = 'com.zsh'
+                // 库名称
+                pom.artifactId = 'step-view'
+                // 版本号
+                pom.version = '1.0.1'
+                // 打包类型
+                pom.packaging 'aar'
+                // 描述信息
+                pom.description 'step-view for Android'
+            }
+        }
+    }
+}
